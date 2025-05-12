@@ -1,5 +1,6 @@
 package me.austinng.recordshop.controller;
 
+import jakarta.validation.Valid;
 import me.austinng.recordshop.dto.ArtistDto;
 import me.austinng.recordshop.dto.ArtistMapper;
 import me.austinng.recordshop.model.Artist;
@@ -20,7 +21,7 @@ public class ArtistController {
     private ArtistMapper artistMapper;
 
     @PostMapping
-    public ArtistDto addArtist(@RequestBody ArtistDto artistDto) {
+    public ArtistDto addArtist(@RequestBody @Valid ArtistDto artistDto) {
         Artist artist = artistMapper.toEntity(artistDto);
         Artist savedArtist = artistRepository.save(artist);
         return artistMapper.toArtistDto(savedArtist);
