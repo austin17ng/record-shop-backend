@@ -3,6 +3,7 @@ package me.austinng.recordshop.controller;
 import jakarta.validation.Valid;
 import me.austinng.recordshop.dto.ArtistDto;
 import me.austinng.recordshop.dto.ArtistMapper;
+import me.austinng.recordshop.exception.ResourceNotFoundException;
 import me.austinng.recordshop.model.Artist;
 import me.austinng.recordshop.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +40,12 @@ public class ArtistController {
     public ArtistDto getArtistById(@PathVariable Long id) {
         return artistRepository.findById(id)
                 .map(artistMapper::toArtistDto)
-                .orElseThrow(() -> new RuntimeException("Artist not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Artist not found"));
     }
 
     @PutMapping("/{id}")
     public ArtistDto updateArtist(@PathVariable Long id, @RequestBody ArtistDto updatedArtistDto) {
-        Artist artist = artistRepository.findById(id).orElseThrow(() -> new RuntimeException("Artist not found"));
+        Artist artist = artistRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Artist not found"));
         artist.setName(updatedArtistDto.getName());
         artist.setCountry(updatedArtistDto.getCountry());
         artist.setGenre(updatedArtistDto.getGenre());
