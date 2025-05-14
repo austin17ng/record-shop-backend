@@ -1,18 +1,19 @@
 package me.austinng.recordshop.controller;
 
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import me.austinng.recordshop.dto.ArtistDto;
 import me.austinng.recordshop.dto.ArtistMapper;
 import me.austinng.recordshop.exception.ResourceNotFoundException;
 import me.austinng.recordshop.model.Artist;
 import me.austinng.recordshop.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/artists")
 public class ArtistController {
@@ -24,6 +25,7 @@ public class ArtistController {
 
     @PostMapping
     public ArtistDto addArtist(@RequestBody @Valid ArtistDto artistDto) {
+        log.info("Add artist: {}", artistDto);
         Artist artist = artistMapper.toEntity(artistDto);
         Artist savedArtist = artistRepository.save(artist);
         return artistMapper.toArtistDto(savedArtist);
@@ -31,6 +33,7 @@ public class ArtistController {
 
     @GetMapping
     public List<ArtistDto> getAllArtists() {
+        log.info("Get all artists");
         return artistRepository.findAll().stream()
                 .map(artistMapper::toArtistDto)
                 .collect(Collectors.toList());
