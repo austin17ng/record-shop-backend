@@ -14,4 +14,6 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
     @EntityGraph(attributePaths = {"artist", "tracks"})
     Optional<Album> findById(long id);
 
+    @EntityGraph(attributePaths = {"artist", "tracks"})
+    List<Album> findTop30ByOrderByReleaseDateDesc();
 }

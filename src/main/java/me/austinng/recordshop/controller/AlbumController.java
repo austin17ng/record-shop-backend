@@ -29,4 +29,11 @@ public class AlbumController {
         return albums.stream().map(albumMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @GetMapping("/new-arrivals")
+    public List<AlbumDto> getAllNewArrivals() {
+        List<Album> albums = albumRepository.findTop30ByOrderByReleaseDateDesc();
+        return albums.stream().map(albumMapper::toDto)
+                .collect(Collectors.toList());
+    }
 }
