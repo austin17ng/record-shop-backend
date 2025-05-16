@@ -36,4 +36,19 @@ public class AlbumController {
         return albums.stream().map(albumMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @GetMapping("/trending")
+    public List<AlbumDto> getAllTrendingAlbums() {
+        return List.of();
+    }
+
+    @GetMapping("/staff-picks")
+    public List<AlbumDto> getAllStaffPickAlbums() {
+        return List.of();
+    }
+
+    @GetMapping("/sale")
+    public List<AlbumDto> getAllSaleAlbums() {
+        return List.of();
+    }
 }

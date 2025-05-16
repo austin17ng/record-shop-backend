@@ -15,6 +15,9 @@ public class AlbumDto {
     private String releaseDate;
     private String genre;
     private String label;
+    private Double popularity;
+    private Boolean isStaffPick;
+    private Double discount;
     private ArtistDto artist;
     private List<TrackDto> tracks;
 }

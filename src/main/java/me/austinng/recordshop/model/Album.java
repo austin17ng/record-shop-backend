@@ -19,6 +19,10 @@ public class Album {
     private LocalDate releaseDate;
     private String genre;
     private String label;
+    private Double popularity;
+    private Boolean isStaffPick;
+    private Double discount;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "artist_id")
