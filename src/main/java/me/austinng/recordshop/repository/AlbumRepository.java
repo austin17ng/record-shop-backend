@@ -18,4 +18,12 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
     List<Album> findTop30ByOrderByReleaseDateDesc();
 
     //TODO
+    @EntityGraph(attributePaths = {"artist", "tracks"})
+    List<Album> findTop30ByOrderByPopularityDesc();
+
+    @EntityGraph(attributePaths = {"artist", "tracks"})
+    List<Album> findTop30ByIsStaffPickTrueOrderByPopularityDesc();
+
+    @EntityGraph(attributePaths = {"artist", "tracks"})
+    List<Album> findTop30ByOrderByDiscountDesc();
 }

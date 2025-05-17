@@ -39,16 +39,22 @@ public class AlbumController {
 
     @GetMapping("/trending")
     public List<AlbumDto> getAllTrendingAlbums() {
-        return List.of();
+        List<Album> albums = albumRepository.findTop30ByOrderByPopularityDesc();
+        return albums.stream().map(albumMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/staff-picks")
     public List<AlbumDto> getAllStaffPickAlbums() {
-        return List.of();
+        List<Album> albums = albumRepository.findTop30ByIsStaffPickTrueOrderByPopularityDesc();
+        return albums.stream().map(albumMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/sale")
     public List<AlbumDto> getAllSaleAlbums() {
-        return List.of();
+        List<Album> albums = albumRepository.findTop30ByOrderByDiscountDesc();
+        return albums.stream().map(albumMapper::toDto)
+                .collect(Collectors.toList());
     }
 }
