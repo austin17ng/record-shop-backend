@@ -1,8 +1,8 @@
 package me.austinng.recordshop.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import me.austinng.recordshop.dto.AlbumDto;
-import me.austinng.recordshop.dto.AlbumMapper;
+import me.austinng.recordshop.dto.album.AlbumDto;
+import me.austinng.recordshop.dto.album.AlbumMapper;
 import me.austinng.recordshop.model.Album;
 import me.austinng.recordshop.repository.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;

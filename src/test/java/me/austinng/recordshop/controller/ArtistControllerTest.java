@@ -1,7 +1,7 @@
 package me.austinng.recordshop.controller;
 
-import me.austinng.recordshop.dto.ArtistDto;
-import me.austinng.recordshop.dto.ArtistMapper;
+import me.austinng.recordshop.dto.album.ArtistDto;
+import me.austinng.recordshop.dto.album.ArtistMapper;
 import me.austinng.recordshop.model.Artist;
 import me.austinng.recordshop.repository.ArtistRepository;
 import org.junit.jupiter.api.Test;

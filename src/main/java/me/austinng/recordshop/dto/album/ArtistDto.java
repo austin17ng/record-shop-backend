@@ -1,4 +1,4 @@
-package me.austinng.recordshop.dto;
+package me.austinng.recordshop.dto.album;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

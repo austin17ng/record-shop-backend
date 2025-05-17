@@ -1,5 +1,6 @@
-package me.austinng.recordshop.dto;
+package me.austinng.recordshop.dto.album;
 
+import me.austinng.recordshop.dto.track.TrackMapper;
 import me.austinng.recordshop.model.Album;
 import org.mapstruct.Mapper;
 

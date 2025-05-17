@@ -1,4 +1,4 @@
-package me.austinng.recordshop.dto;
+package me.austinng.recordshop.dto.track;
 
 import me.austinng.recordshop.model.Track;
 import org.mapstruct.Mapper;

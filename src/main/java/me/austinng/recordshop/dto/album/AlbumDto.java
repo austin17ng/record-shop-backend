@@ -1,8 +1,9 @@
-package me.austinng.recordshop.dto;
+package me.austinng.recordshop.dto.album;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import me.austinng.recordshop.dto.track.TrackDto;
 
 import java.util.List;
 
