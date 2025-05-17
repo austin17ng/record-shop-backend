@@ -1,12 +1,11 @@
-package me.austinng.recordshop.dto;
+package me.austinng.recordshop.dto.login;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 @Data
-public class AuthRequest {
+public class LoginRequest {
     @NotBlank
     @Length(max = 50)
     private String username;
