@@ -22,6 +22,7 @@ public class Album {
     private Double popularity;
     private Boolean isStaffPick;
     private Double discount;
+    private Double price;
 
 
     @ManyToOne(fetch = FetchType.LAZY)

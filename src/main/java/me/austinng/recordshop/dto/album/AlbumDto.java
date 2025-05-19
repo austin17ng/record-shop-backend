@@ -19,6 +19,7 @@ public class AlbumDto {
     private Double popularity;
     private Boolean isStaffPick;
     private Double discount;
+    private Double price;
     private ArtistDto artist;
     private List<TrackDto> tracks;
 }
