@@ -21,6 +21,9 @@ public class Order {
 
     private LocalDateTime orderDate;
 
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
     @ManyToOne
     private User user;
 
