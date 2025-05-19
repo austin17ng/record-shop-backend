@@ -2,10 +2,7 @@ package me.austinng.recordshop.controller;
 
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
-import me.austinng.recordshop.dto.order.AlbumSummaryMapper;
-import me.austinng.recordshop.dto.order.OrderItemMapper;
-import me.austinng.recordshop.dto.order.OrderMapper;
-import me.austinng.recordshop.dto.order.OrderRequest;
+import me.austinng.recordshop.dto.order.*;
 import me.austinng.recordshop.model.Album;
 import me.austinng.recordshop.model.Order;
 import me.austinng.recordshop.model.OrderItem;
@@ -16,14 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -62,6 +57,18 @@ public class OrderController {
 
         Order savedOrder = orderRepository.save(order);
         return ResponseEntity.ok(orderMapper.toOrderDto(savedOrder));
+    }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<?> getAllOrders() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        long userId = user.getId();
+        List<OrderDto> orders = orderRepository.findAllByUserIdOrderByOrderDateDesc(userId)
+                .stream()
+                .map(order -> orderMapper.toOrderDto(order))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(orders);
     }
 
 }

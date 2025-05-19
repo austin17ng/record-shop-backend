@@ -22,7 +22,7 @@ public class Order {
     private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+    private OrderStatus status = OrderStatus.PROCESSING;
 
     @ManyToOne
     private User user;
