@@ -9,14 +9,18 @@ import me.austinng.recordshop.dto.order.OrderRequest;
 import me.austinng.recordshop.model.Album;
 import me.austinng.recordshop.model.Order;
 import me.austinng.recordshop.model.OrderItem;
+import me.austinng.recordshop.model.User;
 import me.austinng.recordshop.repository.AlbumRepository;
 import me.austinng.recordshop.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +41,11 @@ public class OrderController {
     @Transactional
     @PostMapping("/create")
     public ResponseEntity<?> createOrder(@RequestBody OrderRequest orderRequest) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
         Order order = new Order();
+        order.setUser(user);
         order.setOrderDate(LocalDateTime.now());
 
         orderRequest.items().forEach(orderItemRequest -> {
