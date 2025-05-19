@@ -6,6 +6,7 @@ import me.austinng.recordshop.JwtUtil;
 import me.austinng.recordshop.dto.login.LoginRequest;
 import me.austinng.recordshop.dto.login.LoginResponse;
 import me.austinng.recordshop.dto.register.RegisterRequest;
+import me.austinng.recordshop.dto.user.UserMapper;
 import me.austinng.recordshop.model.User;
 import me.austinng.recordshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +34,8 @@ public class AuthController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -70,7 +74,9 @@ public class AuthController {
     }
 
     @GetMapping(value = "/user")
-    public ResponseEntity<?> getUser(@AuthenticationPrincipal UserDetails userDetails) {
-        return ResponseEntity.ok(userDetails.getUsername());
+    public ResponseEntity<?> getUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        return ResponseEntity.ok(userMapper.toUserDto(user));
     }
 }

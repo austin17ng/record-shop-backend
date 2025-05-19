@@ -21,6 +21,8 @@ public class User implements UserDetails {
     private long id;
     private String username;
     private String password;
+    private String firstName;
+    private String lastName;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -38,6 +40,4 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() { return true; }
-
-
 }
