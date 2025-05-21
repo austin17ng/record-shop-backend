@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, String>> handleRuntimeException(RuntimeException ex) {
         Map<String, String> errors = new HashMap<>();
-        errors.put("error", "Internal Server Error" + ex.getMessage());
+        errors.put("error", "Internal Server Error: " + ex.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errors);
     }
 

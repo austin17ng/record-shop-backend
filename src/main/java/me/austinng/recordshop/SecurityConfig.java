@@ -52,10 +52,7 @@ public class SecurityConfig {
                            .requestMatchers(
                                    "/api/auth/login",
                                    "/api/auth/register",
-                                   "/api/albums/new-arrivals",
-                                   "/api/albums/sale",
-                                   "/api/albums/staff-picks",
-                                   "/api/albums/trending"
+                                   "/api/albums/**"
                                    ).permitAll()
                            .anyRequest().authenticated()
                 )

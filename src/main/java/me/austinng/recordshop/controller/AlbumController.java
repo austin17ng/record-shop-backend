@@ -7,6 +7,7 @@ import me.austinng.recordshop.model.Album;
 import me.austinng.recordshop.repository.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,6 +29,12 @@ public class AlbumController {
         List<Album> albums = albumRepository.findAll();
         return albums.stream().map(albumMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/{id}")
+    public AlbumDto getAlbumById(@PathVariable int id) {
+        Album album = albumRepository.findById(id).orElseThrow(() -> new RuntimeException("Album not found"));
+        return albumMapper.toDto(album);
     }
 
     @GetMapping("/new-arrivals")
