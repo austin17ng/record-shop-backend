@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
-    @EntityGraph(attributePaths = {"user", "album"})
-    List<CartItem> findByUser_Id(long id);
+    Optional<CartItem> findByUserIdAndAlbumId(Long userId, Long albumId);
 
-    Optional<CartItem> findByUserIdAndAlbumId(Long useId, Long albumId);
+    @EntityGraph(attributePaths = {"album", "user"})
+    List<CartItem> findByUser_Id(Long userId);
 
     @Modifying
     @Transactional
@@ -23,4 +23,5 @@ public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
     int incrementQuantityByUserIdAndAlbumId(@Param("userId") Long userId, @Param("albumId") Long albumId);
 
 
+    void deleteByUserId(Long userId);
 }

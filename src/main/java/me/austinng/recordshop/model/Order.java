@@ -34,4 +34,11 @@ public class Order {
         item.setOrder(this);
         this.orderItems.add(item);
     }
+
+    public void setItems(List<OrderItem> items) {
+        for (OrderItem item : items) {
+            item.setOrder(this);
+        }
+        this.orderItems = items;
+    }
 }
