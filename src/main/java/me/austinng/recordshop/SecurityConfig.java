@@ -30,10 +30,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     private UserRepository userRepository;
     private JwtUtil jwtUtil;
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-    public SecurityConfig(JwtUtil jwtUtil, UserRepository userRepository) {
+    public SecurityConfig(JwtUtil jwtUtil, UserRepository userRepository, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint) {
         this.jwtUtil = jwtUtil;
         this.userRepository = userRepository;
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
     }
 
     @Bean
@@ -53,6 +55,10 @@ public class SecurityConfig {
                                    "/api/albums/**"
                                    ).permitAll()
                            .anyRequest().authenticated()
+                )
+                .exceptionHandling( eh ->
+                        eh.authenticationEntryPoint(jwtAuthenticationEntryPoint)
+
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)

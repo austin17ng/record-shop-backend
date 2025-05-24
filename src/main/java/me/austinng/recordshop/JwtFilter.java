@@ -51,7 +51,8 @@ public class JwtFilter extends OncePerRequestFilter {
                 }
             } catch (Exception e) {
                 // Optional: log invalid token or send error response
-                System.out.println("Invalid JWT: " + e.getMessage());
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
             }
         }
 
