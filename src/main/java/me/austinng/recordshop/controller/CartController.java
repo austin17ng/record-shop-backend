@@ -12,6 +12,7 @@ import me.austinng.recordshop.model.User;
 import me.austinng.recordshop.repository.AlbumRepository;
 import me.austinng.recordshop.repository.CartItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +45,7 @@ public class CartController {
     }
 
     @PostMapping("/add-item")
-    public void addItem(@RequestBody @Valid AddItemRequest request) {
+    public ResponseEntity<CartItemDto> addItem(@RequestBody @Valid AddItemRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) auth.getPrincipal();
 
@@ -54,7 +55,8 @@ public class CartController {
         cartItem.setUser(user);
         cartItem.setQuantity(request.quantity());
 
-        cartItemRepository.save(cartItem);
+        CartItem savedCartItem = cartItemRepository.save(cartItem);
+        return ResponseEntity.ok(cartItemMapper.toDto(savedCartItem));
     }
 
     @PostMapping("/add-single-item")
